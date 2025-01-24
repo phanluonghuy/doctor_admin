@@ -76,10 +76,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               ProfileTab(
                 onPressed: () {
-                  context.read<NavigationProvider>().setIndex(0);
+                    context.push('/editSpecialization');
                 },
-                iconPath: 'assets/buttons/icons8-card.svg',
-                title: "Payment Methods",
+                iconPath: 'assets/buttons/icons8-star.svg',
+                title: "Specializations",
               ),
               Divider(
                 height: 5,

@@ -1,6 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doctoradmin/viewModel/myBooking_viewmodel.dart';
+import 'package:doctoradmin/viewModel/uploadResult_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/appointmentModel.dart';
 import '../texts/app_text.dart';
@@ -15,6 +19,8 @@ class MyBookingConfirmCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MyBookingViewModel myBookingViewModel =
+        context.read<MyBookingViewModel>();
     return Container(
       padding: const EdgeInsets.all(8.0),
       margin: const EdgeInsets.only(bottom: 10),
@@ -64,7 +70,7 @@ class MyBookingConfirmCard extends StatelessWidget {
               ),
             ),
             title: Text(
-              'Dr ${appointment.doctorName}',
+              'Pt ${appointment.doctorName}',
               style: AppTextStyle.subtitle.copyWith(fontSize: 15),
             ),
             subtitle: Text(
@@ -88,12 +94,21 @@ class MyBookingConfirmCard extends StatelessWidget {
                       text: "Cancel",
                       textStyle: TextStyle(
                           fontSize: 16.0, color: AppColors.primaryColor),
-                      onPressed: () {})),
+                      onPressed: () {
+                        Map<String, String> data = {"status": "cancelled"};
+                        myBookingViewModel.updateStatus(
+                            context, appointment.id, data);
+                      })),
               SizedBox(width: 8),
               Expanded(
                   child: PrimaryButton(
-                      text: "Reschedule",
-                      onPressed: () {},
+                      text: "Complete",
+                      loading: myBookingViewModel.isQuerying,
+                      onPressed: () {
+                        Map<String, String> data = {"status": "completed"};
+                        myBookingViewModel.updateStatus(
+                            context, appointment.id, data);
+                      },
                       fontSize: 16.0,
                       context: context))
             ],
@@ -160,7 +175,7 @@ class MyBookingPendingCard extends StatelessWidget {
               ),
             ),
             title: Text(
-              'Dr ${appointment.doctorName}',
+              'Pt ${appointment.doctorName}',
               style: AppTextStyle.subtitle.copyWith(fontSize: 15),
             ),
             subtitle: Text(
@@ -256,7 +271,7 @@ class MyBookingCompleteCard extends StatelessWidget {
               ),
             ),
             title: Text(
-              'Dr ${appointment.doctorName}',
+              'Pt ${appointment.doctorName}',
               style: AppTextStyle.subtitle.copyWith(fontSize: 15),
             ),
             subtitle: Text(
@@ -277,15 +292,19 @@ class MyBookingCompleteCard extends StatelessWidget {
             children: [
               Expanded(
                   child: OutlinePrimaryButton(
-                      text: "Re-Book",
+                      text: "View Details",
                       textStyle: TextStyle(
                           fontSize: 16.0, color: AppColors.primaryColor),
                       onPressed: () {})),
               SizedBox(width: 8),
               Expanded(
                   child: PrimaryButton(
-                      text: "Add Review",
-                      onPressed: () {},
+                      text: "Upload Result",
+                      onPressed: () {
+                        context.read<UploadResultViewModel>().bookingId =
+                            appointment.id;
+                        context.push('/uploadResult');
+                      },
                       fontSize: 16.0,
                       context: context))
             ],
@@ -352,7 +371,7 @@ class MyBookingCancelCard extends StatelessWidget {
               ),
             ),
             title: Text(
-              'Dr ${appointment.doctorName}',
+              'Pt ${appointment.doctorName}',
               style: AppTextStyle.subtitle.copyWith(fontSize: 15),
             ),
             subtitle: Text(

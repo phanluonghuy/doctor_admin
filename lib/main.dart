@@ -4,8 +4,10 @@ import 'package:doctoradmin/viewModel/NavigationProvider.dart';
 import 'package:doctoradmin/viewModel/auth_viewmodel.dart';
 import 'package:doctoradmin/viewModel/doctorBooking_viewmodel.dart';
 import 'package:doctoradmin/viewModel/doctor_viewmodel.dart';
+import 'package:doctoradmin/viewModel/editSpecialization_viewmodel.dart';
 import 'package:doctoradmin/viewModel/myBooking_viewmodel.dart';
 import 'package:doctoradmin/viewModel/signup_viewmodel.dart';
+import 'package:doctoradmin/viewModel/uploadResult_viewmodel.dart';
 import 'package:doctoradmin/viewModel/user_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,6 +31,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
         ChangeNotifierProvider(
             create: (_) => DoctorBookingViewModel(), lazy: true),
+        ChangeNotifierProvider(create: (_) => UploadResultViewModel(), lazy: true),
+        ChangeNotifierProvider(create: (_) => SpecializationViewModel(), lazy: true),
         ChangeNotifierProvider(create: (_) => MyBookingViewModel(), lazy: true),
         ChangeNotifierProvider(create: (_) => SignUpViewModel(), lazy: true),
       ],

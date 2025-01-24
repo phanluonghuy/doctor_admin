@@ -19,11 +19,19 @@ class AppUrls {
   static const createAppointment = "$baseUrl/appointment";
 
   static var getMyAppointments =
-      (String patientId) => "$baseUrl/appointment/patient/$patientId";
+      (String patientId) => "$baseUrl/appointment/doctor/$patientId";
 
   static const createPayment = "$baseUrl/payment";
   static const getNearestAppointment =
       "$baseUrl/appointment/appointment/nearest";
+
+  static var updateCompletedStatus =
+      (String appointmentId) => "$baseUrl/appointment/$appointmentId/status";
+
+  static const createMedicalRecords = "$baseUrl/medical-record";
+  // static const createTestResults = "$baseUrl/test-result";
+  static var uploadTestResults =
+      (String testResultId) => "$baseUrl/test-result/$testResultId/upload";
 }
 
 //testerpayment@test.com
