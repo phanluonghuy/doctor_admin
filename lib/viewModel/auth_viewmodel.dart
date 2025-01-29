@@ -42,10 +42,10 @@ class AuthViewModel with ChangeNotifier {
         Utils.flushBarErrorMessage(value.description ?? "", context);
         return;
       }
-      if (value.message != "doctor") {
-        Utils.flushBarErrorMessage("You are not a doctor", context);
-        return;
-      }
+      // if (value.message != "doctor") {
+      //   Utils.flushBarErrorMessage("You are not a doctor", context);
+      //   return;
+      // }
       final userPreference = Provider.of<UserViewModel>(context, listen: false);
       userPreference.saveUser(value.data ?? "");
 
