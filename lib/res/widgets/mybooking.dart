@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctoradmin/viewModel/myBooking_viewmodel.dart';
+import 'package:doctoradmin/viewModel/prescriptions_viewmodel.dart';
 import 'package:doctoradmin/viewModel/uploadResult_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -295,7 +296,11 @@ class MyBookingCompleteCard extends StatelessWidget {
                       text: "Prescription",
                       textStyle: TextStyle(
                           fontSize: 16.0, color: AppColors.primaryColor),
-                      onPressed: () {})),
+                      onPressed: () {
+                        context.read<PrescriptionsViewModel>().bookingId =
+                            appointment.id;
+                        context.push('/prescription');
+                      })),
               SizedBox(width: 8),
               Expanded(
                   child: PrimaryButton(

@@ -7,6 +7,7 @@ import 'package:doctoradmin/view/explore_screen.dart';
 import 'package:doctoradmin/view/forgotPassword/forgotPassword_screen.dart';
 import 'package:doctoradmin/view/home_screen.dart';
 import 'package:doctoradmin/view/login_screen.dart';
+import 'package:doctoradmin/view/prescription_screen.dart';
 import 'package:doctoradmin/view/profile_screen.dart';
 import 'package:doctoradmin/view/signUp/signup_screen.dart';
 import 'package:doctoradmin/view/signUp/signup_verityOTP_screen.dart';
@@ -93,6 +94,7 @@ final GoRouter router = GoRouter(
         path: '/successBooking',
         builder: (context, state) => const SuccessBookingScreen()),
     GoRoute(path: '/uploadResult', builder: (context, state) => UploadResultScreen()),
+    GoRoute(path: '/prescription', builder: (context, state) => PrescriptionScreen()),
   ],
   errorBuilder: (context, state) => const Scaffold(
     body: Center(

@@ -32,7 +32,14 @@ class AppUrls {
   static const createTestResults = "$baseUrl/test-result";
   static var uploadTestResults =
       (String testResultId) => "$baseUrl/test-result/$testResultId/upload";
-  static var getTestResult = (String testResultId) => "$baseUrl/medical-record/$testResultId";
+  static var getTestResult =
+      (String testResultId) => "$baseUrl/medical-record/$testResultId";
+
+  static const getAllMedicine = "$baseUrl/medicine";
+  static var getMedicalRecordsByAppointment =
+      (String appointmentId) => "$baseUrl/medical-record/appointment/$appointmentId";
+  static const createDosages = "$baseUrl/dosage";
+  static const createPrescription = "$baseUrl/prescription";
 }
 
 //testerpayment@test.com
