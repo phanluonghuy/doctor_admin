@@ -16,16 +16,16 @@ class TestRepository {
     }
   }
 
-  // Future<ApiResponse> createTestResults(dynamic data) async {
-  //   try {
-  //     final response = await _network.getPostApiResponse(
-  //         AppUrls.createTestResults, data,
-  //         isTokenRequired: false);
-  //     return response;
-  //   } catch (e) {
-  //     rethrow; //Big Brain
-  //   }
-  // }
+  Future<ApiResponse> createTestResults(dynamic data) async {
+    try {
+      final response = await _network.getPostApiResponse(
+          AppUrls.createTestResults, data,
+          isTokenRequired: false);
+      return response;
+    } catch (e) {
+      rethrow; //Big Brain
+    }
+  }
 
   Future<ApiResponse> uploadTestResults(
       String id, dynamic data, dynamic image) async {
@@ -33,6 +33,16 @@ class TestRepository {
       final response = await _network.getPostApiResponseOnlyFile(
           AppUrls.uploadTestResults(id), "result-file", data, image,
           isTokenRequired: false);
+      return response;
+    } catch (e) {
+      rethrow; //Big Brain
+    }
+  }
+
+
+  Future<ApiResponse> getTestResults(String id) async {
+    try {
+      final response = await _network.getGetApiResponse(AppUrls.getTestResult(id), false);
       return response;
     } catch (e) {
       rethrow; //Big Brain

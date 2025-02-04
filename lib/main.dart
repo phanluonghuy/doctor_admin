@@ -31,8 +31,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
         ChangeNotifierProvider(
             create: (_) => DoctorBookingViewModel(), lazy: true),
-        ChangeNotifierProvider(create: (_) => UploadResultViewModel(), lazy: true),
-        ChangeNotifierProvider(create: (_) => SpecializationViewModel(), lazy: true),
+        ChangeNotifierProvider(
+            create: (_) => UploadResultViewModel(), lazy: true),
+        ChangeNotifierProvider(
+            create: (_) => SpecializationViewModel(), lazy: true),
         ChangeNotifierProvider(create: (_) => MyBookingViewModel(), lazy: true),
         ChangeNotifierProvider(create: (_) => SignUpViewModel(), lazy: true),
       ],

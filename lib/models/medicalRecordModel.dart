@@ -1,8 +1,8 @@
 class MedicalRecord {
   final String id;
-  final String appointmentId;
-  final String diagnosis;
-  final String? notes;
+  String appointmentId;
+  String diagnosis;
+  String? notes;
   final DateTime createdAt;
   final DateTime updatedAt;
 

@@ -292,14 +292,14 @@ class MyBookingCompleteCard extends StatelessWidget {
             children: [
               Expanded(
                   child: OutlinePrimaryButton(
-                      text: "View Details",
+                      text: "Prescription",
                       textStyle: TextStyle(
                           fontSize: 16.0, color: AppColors.primaryColor),
                       onPressed: () {})),
               SizedBox(width: 8),
               Expanded(
                   child: PrimaryButton(
-                      text: "Upload Result",
+                      text: "Update Result",
                       onPressed: () {
                         context.read<UploadResultViewModel>().bookingId =
                             appointment.id;

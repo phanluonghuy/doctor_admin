@@ -53,6 +53,7 @@ dependencies:
   intl: ^0.19.0
   flutter_paypal_payment: ^1.0.8
   uuid: ^4.5.1
+  photo_view: ^0.15.0
 
 dev_dependencies:
   flutter_test:
