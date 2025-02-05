@@ -273,6 +273,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
           child: PrimaryButton(
               text: "Update",
               onPressed: () {
+                // print(viewModel.bookingId);
                 if (viewModel.medicineIds.isEmpty) {
                   Utils.flushBarErrorMessage(
                       "Please select a medicine", context);
@@ -309,7 +310,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                   "duration": viewModel.duration,
                 };
                 viewModel.createDosages(context, data);
-                viewModel.createPrescriptions(context);
+                // viewModel.createPrescriptions(context);
               },
               context: context)),
     );

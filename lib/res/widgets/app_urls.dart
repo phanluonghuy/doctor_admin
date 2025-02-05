@@ -40,6 +40,10 @@ class AppUrls {
       (String appointmentId) => "$baseUrl/medical-record/appointment/$appointmentId";
   static const createDosages = "$baseUrl/dosage";
   static const createPrescription = "$baseUrl/prescription";
+
+  static var getWorkSchedule = (String id) => "$baseUrl/work-schedule/doctor/$id";
+
+  static const updateWorkSchedule = "$baseUrl/work-schedule";
 }
 
 //testerpayment@test.com

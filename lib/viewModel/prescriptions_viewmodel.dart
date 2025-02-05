@@ -82,14 +82,18 @@ class PrescriptionsViewModel with ChangeNotifier {
         return;
       }
 
-      Utils.flushBarSuccessMessage(value.message ?? "", context);
+      // Utils.flushBarSuccessMessage(value.message ?? "", context);
       _dosageId = value.data["_id"];
+      // print(_dosageId);
+      createPrescriptions(context);
     }).onError((error, stackTrace) {
       Utils.flushBarErrorMessage(error.toString(), context, isBottom: false);
       print(error);
       setLoading(false);
     });
   }
+
+
   Future<void> createPrescriptions(BuildContext context) async {
     Map<String,dynamic> data = {
       "medicalRecordId": _medicalRecord?.id,
@@ -99,7 +103,7 @@ class PrescriptionsViewModel with ChangeNotifier {
     setLoading(true);
     _prescriptionRepository.createPrescriptions(data).then((value) {
       setLoading(false);
-      print(value);
+      // print(value);
       if (value.acknowledgement == false) {
         Utils.flushBarErrorMessage(value.message ?? "", context);
         return;
@@ -112,6 +116,22 @@ class PrescriptionsViewModel with ChangeNotifier {
       setLoading(false);
     });
   }
+
+  // Future<void> getDosages(BuildContext context) async {
+  //   setLoading(true);
+  //   _prescriptionRepository.getDosages(_bookingId).then((value) {
+  //     setLoading(false);
+  //     if (value.acknowledgement == false) {
+  //       Utils.flushBarErrorMessage(value.message ?? "", context);
+  //       return;
+  //     }
+  //     _dosageId = value.data[0]["_id"];
+  //   }).onError((error, stackTrace) {
+  //     Utils.flushBarErrorMessage(error.toString(), context, isBottom: false);
+  //     print(error);
+  //     setLoading(false);
+  //   });
+  // }
 
   MedicalRecord? get medicalRecord => _medicalRecord;
 

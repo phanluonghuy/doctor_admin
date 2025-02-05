@@ -10,6 +10,7 @@ import 'package:doctoradmin/viewModel/prescriptions_viewmodel.dart';
 import 'package:doctoradmin/viewModel/signup_viewmodel.dart';
 import 'package:doctoradmin/viewModel/uploadResult_viewmodel.dart';
 import 'package:doctoradmin/viewModel/user_viewmodel.dart';
+import 'package:doctoradmin/viewModel/workSchedule_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PrescriptionsViewModel(), lazy: true),
         ChangeNotifierProvider(create: (_) => MyBookingViewModel(), lazy: true),
         ChangeNotifierProvider(create: (_) => SignUpViewModel(), lazy: true),
+        ChangeNotifierProvider(create: (_)=>WorkScheduleProvider(), lazy: true),
       ],
       child: WillPopScope(
         onWillPop: () async {

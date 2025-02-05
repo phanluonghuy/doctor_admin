@@ -68,4 +68,21 @@ class UserRepository {
       rethrow;
     }
   }
+
+  Future<ApiResponse> getWorkSchedule(String id) async {
+    try {
+      final response = await _network.getGetApiResponse(AppUrls.getWorkSchedule(id), true);
+      return response;
+    } catch (e) {
+      rethrow; //Big Brain
+    }
+  }
+  Future<ApiResponse> updateWorkSchedule(Map<String, dynamic> data) async {
+    try {
+      final response = await _network.getPostApiResponse(AppUrls.updateWorkSchedule, data, isTokenRequired: true);
+      return response;
+    } catch (e) {
+      rethrow; //Big Brain
+    }
+  }
 }

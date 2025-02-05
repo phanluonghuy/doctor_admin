@@ -88,9 +88,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 thickness: 0.5,
               ),
               ProfileTab(
-                onPressed: () {},
-                iconPath: 'assets/buttons/icons8-love.svg',
-                title: "Favourites",
+                onPressed: () {
+                  context.push('/workSchedule');
+                },
+                iconPath: 'assets/buttons/icons8-calendar.svg',
+                title: "Work Schedule",
               ),
               Divider(
                 height: 5,
@@ -104,28 +106,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
                 iconPath: 'assets/buttons/icons8-setting.svg',
                 title: "Settings",
-              ),
-              Divider(
-                height: 5,
-                indent: 20,
-                endIndent: 20,
-                thickness: 0.5,
-              ),
-              ProfileTab(
-                onPressed: () {},
-                iconPath: 'assets/buttons/icons8-help.svg',
-                title: "Help & Support",
-              ),
-              Divider(
-                height: 5,
-                indent: 20,
-                endIndent: 20,
-                thickness: 0.5,
-              ),
-              ProfileTab(
-                onPressed: () {},
-                iconPath: 'assets/buttons/icons8-lock.svg',
-                title: "Privacy Policy",
               ),
               Divider(
                 height: 5,

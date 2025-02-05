@@ -2,6 +2,7 @@ import 'package:doctoradmin/view/booking_screen.dart';
 import 'package:doctoradmin/view/chat_screen.dart';
 import 'package:doctoradmin/view/doctorBooking/selectBookingTime_screen.dart';
 import 'package:doctoradmin/view/editProfile_screen.dart';
+import 'package:doctoradmin/view/editWorkSchedule_screen.dart';
 import 'package:doctoradmin/view/edit_specialization_screen.dart';
 import 'package:doctoradmin/view/explore_screen.dart';
 import 'package:doctoradmin/view/forgotPassword/forgotPassword_screen.dart';
@@ -95,6 +96,7 @@ final GoRouter router = GoRouter(
         builder: (context, state) => const SuccessBookingScreen()),
     GoRoute(path: '/uploadResult', builder: (context, state) => UploadResultScreen()),
     GoRoute(path: '/prescription', builder: (context, state) => PrescriptionScreen()),
+    GoRoute(path: '/workSchedule', builder: (context, state) => EditWorkScheduleScreen()),
   ],
   errorBuilder: (context, state) => const Scaffold(
     body: Center(
