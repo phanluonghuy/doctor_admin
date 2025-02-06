@@ -2,6 +2,7 @@ import 'package:doctoradmin/res/widgets/coloors.dart';
 import 'package:doctoradmin/utils/routes.dart';
 import 'package:doctoradmin/viewModel/NavigationProvider.dart';
 import 'package:doctoradmin/viewModel/auth_viewmodel.dart';
+import 'package:doctoradmin/viewModel/chat_viewmodel.dart';
 import 'package:doctoradmin/viewModel/doctorBooking_viewmodel.dart';
 import 'package:doctoradmin/viewModel/doctor_viewmodel.dart';
 import 'package:doctoradmin/viewModel/editSpecialization_viewmodel.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => ChatViewModel()),
         ChangeNotifierProvider(create: (_) => AuthViewModel(), lazy: true),
         ChangeNotifierProvider(create: (_) => UserViewModel()),
         ChangeNotifierProvider(create: (_) => DoctorViewModel()),
