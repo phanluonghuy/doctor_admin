@@ -7,4 +7,10 @@ abstract class BaseApiServices {
   Future<dynamic> getPostApiResponseWithFile(
       String url, dynamic data, dynamic imageFile,
       {bool isTokenRequired = false});
+  Future<dynamic> getPatchApiResponse(String url, dynamic data,
+      {bool isTokenRequired = false});
+
+  Future<dynamic> getPostApiResponseOnlyFile(
+      String url, String imageFileName, dynamic data, dynamic imageFile,
+      {bool isTokenRequired = false});
 }

@@ -1,8 +1,10 @@
+
+
+import 'package:doctoradmin/res/widgets/mybooking.dart';
 import 'package:doctoradmin/viewModel/myBooking_viewmodel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../res/widgets/mybooking.dart';
 
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
@@ -26,7 +28,7 @@ class _BookingScreenState extends State<BookingScreen> {
 
     return DefaultTabController(
       initialIndex: 0,
-      length: 4,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: const Text("My Booking"),
@@ -34,9 +36,6 @@ class _BookingScreenState extends State<BookingScreen> {
             tabs: <Widget>[
               Tab(
                 text: "Confirmed",
-              ),
-              Tab(
-                text: "Pending",
               ),
               Tab(
                 text: "Completed",
@@ -75,7 +74,6 @@ class _BookingScreenState extends State<BookingScreen> {
         body: TabBarView(
           children: <Widget>[
             upComing(myBookingViewModel),
-            pending(myBookingViewModel),
             complete(myBookingViewModel),
             cancel(myBookingViewModel),
           ],
@@ -98,27 +96,6 @@ Widget upComing(MyBookingViewModel myBookingViewModel) {
               final appointment =
                   myBookingViewModel.confirmedAppointments[index];
               return MyBookingConfirmCard(
-                appointment: appointment,
-              );
-            }),
-        SizedBox(height: 80),
-      ],
-    ),
-  );
-}
-
-Widget pending(MyBookingViewModel myBookingViewModel) {
-  return SingleChildScrollView(
-    padding: const EdgeInsets.all(16.0),
-    child: Column(
-      children: [
-        ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: myBookingViewModel.pendingAppointments.length,
-            itemBuilder: (BuildContext context, int index) {
-              final appointment = myBookingViewModel.pendingAppointments[index];
-              return MyBookingPendingCard(
                 appointment: appointment,
               );
             }),

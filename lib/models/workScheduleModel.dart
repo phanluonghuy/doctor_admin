@@ -1,5 +1,3 @@
-
-
 class WorkSchedule {
   final String id;
   final String doctorId;
@@ -46,11 +44,13 @@ class AvailableTime {
   final String dayOfWeek;
   final String startTime;
   final String endTime;
+  final List<String> restTime; // Added restTime field
 
   AvailableTime({
     required this.dayOfWeek,
     required this.startTime,
     required this.endTime,
+    required this.restTime,
   });
 
   // Factory constructor to create an `AvailableTime` object from JSON
@@ -59,6 +59,7 @@ class AvailableTime {
       dayOfWeek: json['dayOfWeek'] as String,
       startTime: json['startTime'] as String,
       endTime: json['endTime'] as String,
+      restTime: List<String>.from(json['restTime'] as List),
     );
   }
 
@@ -68,7 +69,22 @@ class AvailableTime {
       'dayOfWeek': dayOfWeek,
       'startTime': startTime,
       'endTime': endTime,
+      'restTime': restTime,
     };
+  }
+
+  AvailableTime copyWith({
+    String? dayOfWeek,
+    String? startTime,
+    String? endTime,
+    List<String>? restTime,
+  }) {
+    return AvailableTime(
+      dayOfWeek: dayOfWeek ?? this.dayOfWeek,
+      startTime: startTime ?? this.startTime,
+      endTime: endTime ?? this.endTime,
+      restTime: restTime ?? this.restTime,
+    );
   }
 
   // Validates the time format to ensure it's in HH:mm format

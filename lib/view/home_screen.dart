@@ -107,31 +107,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            FutureBuilder<Appointment>(
-              future: _doctorRepository.getNearestAppointment(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text(
-                      "Error: ${snapshot.error}",
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  );
-                } else if (!snapshot.hasData) {
-                  return Center(
-                    child: Text(
-                      "No appointments found.",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  );
-                } else {
-                  final appointment = snapshot.data!;
-                  return HomeBanner1(appointment: appointment);
-                }
-              },
-            ),
+            // FutureBuilder<Appointment>(
+            //   future: _doctorRepository.getNearestAppointment(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.connectionState == ConnectionState.waiting) {
+            //       return Center(child: CircularProgressIndicator());
+            //     } else if (snapshot.hasError) {
+            //       return Center(
+            //         child: Text(
+            //           "Error: ${snapshot.error}",
+            //           style: TextStyle(color: Colors.red),
+            //         ),
+            //       );
+            //     } else if (!snapshot.hasData) {
+            //       return Center(
+            //         child: Text(
+            //           "No appointments found.",
+            //           style: TextStyle(fontSize: 16),
+            //         ),
+            //       );
+            //     } else {
+            //       final appointment = snapshot.data!;
+            //       return HomeBanner1(appointment: appointment);
+            //     }
+            //   },
+            // ),
             SizedBox(height: height * 0.02),
             Row(
               children: [
@@ -197,83 +197,83 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SizedBox(
-              height: height * 0.1,
-              child: FutureBuilder<List<Doctor>>(
-                future: _doctorRepository.getTopDoctor(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text(
-                        "Error: ${snapshot.error}",
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    );
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Center(
-                      child: Text(
-                        "No doctors found.",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    );
-                  } else {
-                    final List<Doctor> doctors = snapshot.data!;
-                    return ListView.builder(
-                      itemCount: doctors.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final doctor = doctors[index];
-                        return Center(
-                          child: Container(
-                            width: width * 0.6,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.grey.shade300),
-                            ),
-                            margin: const EdgeInsets.symmetric(horizontal: 4),
-                            child: ListTile(
-                              leading: SizedBox(
-                                width: 50,
-                                child: CachedNetworkImage(
-                                  imageUrl: doctor.avatar.url,
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey.shade300),
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  placeholder: (context, url) => Center(
-                                      child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) => Icon(
-                                      Icons.person,
-                                      color: Colors.grey.shade800),
-                                ),
-                              ),
-                              title: Text('Dr. ${doctor.name.split(' ').last}'),
-                              subtitle: Text(
-                                "Rating: ${doctor.averageRating.toStringAsFixed(1) ?? 'N/A'} ⭐ \nReviews: ${doctor.totalReviews ?? 0} 📃",
-                              ),
-                              onTap: () {
-                                // Navigate to doctor details or perform an action
-                                context.push('/doctorMain/${doctor.id}');
-                              },
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  }
-                },
-              ),
-            ),
+            // SizedBox(
+            //   height: height * 0.1,
+            //   child: FutureBuilder<List<Doctor>>(
+            //     future: _doctorRepository.getTopDoctor(),
+            //     builder: (context, snapshot) {
+            //       if (snapshot.connectionState == ConnectionState.waiting) {
+            //         return Center(child: CircularProgressIndicator());
+            //       } else if (snapshot.hasError) {
+            //         return Center(
+            //           child: Text(
+            //             "Error: ${snapshot.error}",
+            //             style: TextStyle(color: Colors.red),
+            //           ),
+            //         );
+            //       } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            //         return Center(
+            //           child: Text(
+            //             "No doctors found.",
+            //             style: TextStyle(fontSize: 16),
+            //           ),
+            //         );
+            //       } else {
+            //         final List<Doctor> doctors = snapshot.data!;
+            //         return ListView.builder(
+            //           itemCount: doctors.length,
+            //           scrollDirection: Axis.horizontal,
+            //           itemBuilder: (context, index) {
+            //             final doctor = doctors[index];
+            //             return Center(
+            //               child: Container(
+            //                 width: width * 0.6,
+            //                 decoration: BoxDecoration(
+            //                   borderRadius: BorderRadius.circular(10),
+            //                   border: Border.all(color: Colors.grey.shade300),
+            //                 ),
+            //                 margin: const EdgeInsets.symmetric(horizontal: 4),
+            //                 child: ListTile(
+            //                   leading: SizedBox(
+            //                     width: 50,
+            //                     child: CachedNetworkImage(
+            //                       imageUrl: doctor.avatar.url,
+            //                       imageBuilder: (context, imageProvider) =>
+            //                           Container(
+            //                         decoration: BoxDecoration(
+            //                           border: Border.all(
+            //                               color: Colors.grey.shade300),
+            //                           borderRadius: BorderRadius.circular(10),
+            //                           image: DecorationImage(
+            //                             image: imageProvider,
+            //                             fit: BoxFit.cover,
+            //                           ),
+            //                         ),
+            //                       ),
+            //                       placeholder: (context, url) => Center(
+            //                           child: CircularProgressIndicator()),
+            //                       errorWidget: (context, url, error) => Icon(
+            //                           Icons.person,
+            //                           color: Colors.grey.shade800),
+            //                     ),
+            //                   ),
+            //                   title: Text('Dr. ${doctor.name.split(' ').last}'),
+            //                   subtitle: Text(
+            //                     "Rating: ${doctor.averageRating.toStringAsFixed(1) ?? 'N/A'} ⭐ \nReviews: ${doctor.totalReviews ?? 0} 📃",
+            //                   ),
+            //                   onTap: () {
+            //                     // Navigate to doctor details or perform an action
+            //                     context.push('/doctorMain/${doctor.id}');
+            //                   },
+            //                 ),
+            //               ),
+            //             );
+            //           },
+            //         );
+            //       }
+            //     },
+            //   ),
+            // ),
             SizedBox(height: 80),
           ],
         ),

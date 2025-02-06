@@ -1,5 +1,5 @@
 class AppUrls {
-  static const baseUrl = "http://10.0.2.2:8080/api";
+  static const baseUrl = "http://192.168.10.159:8080/api";
   static const loginEndPoint = "$baseUrl/user/sign-in";
   static const registerEndPoint = "$baseUrl/user/sign-up";
   static const sendOTP = "$baseUrl/user/getOTP";
@@ -19,11 +19,31 @@ class AppUrls {
   static const createAppointment = "$baseUrl/appointment";
 
   static var getMyAppointments =
-      (String patientId) => "$baseUrl/appointment/patient/$patientId";
+      (String patientId) => "$baseUrl/appointment/doctor/$patientId";
 
   static const createPayment = "$baseUrl/payment";
   static const getNearestAppointment =
       "$baseUrl/appointment/appointment/nearest";
+
+  static var updateCompletedStatus =
+      (String appointmentId) => "$baseUrl/appointment/$appointmentId/status";
+
+  static const createMedicalRecords = "$baseUrl/medical-record";
+  static const createTestResults = "$baseUrl/test-result";
+  static var uploadTestResults =
+      (String testResultId) => "$baseUrl/test-result/$testResultId/upload";
+  static var getTestResult =
+      (String testResultId) => "$baseUrl/medical-record/$testResultId";
+
+  static const getAllMedicine = "$baseUrl/medicine";
+  static var getMedicalRecordsByAppointment =
+      (String appointmentId) => "$baseUrl/medical-record/appointment/$appointmentId";
+  static const createDosages = "$baseUrl/dosage";
+  static const createPrescription = "$baseUrl/prescription";
+
+  static var getWorkSchedule = (String id) => "$baseUrl/work-schedule/doctor/$id";
+
+  static const updateWorkSchedule = "$baseUrl/work-schedule";
 }
 
 //testerpayment@test.com

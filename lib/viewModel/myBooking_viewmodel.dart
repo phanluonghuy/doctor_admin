@@ -10,8 +10,10 @@ class MyBookingViewModel with ChangeNotifier {
   final MyBookingRepository _myBookingRepository = MyBookingRepository();
   final List<Appointment> _appointments = [];
   bool _loading = false;
+  bool _isQuerying = false;
 
   bool get loading => _loading;
+  bool get isQuerying => _isQuerying;
 
   List<Appointment> get appointments => _appointments;
 
@@ -29,6 +31,11 @@ class MyBookingViewModel with ChangeNotifier {
 
   void setLoading(bool value) {
     _loading = value;
+    notifyListeners();
+  }
+
+  void setQuerying(bool value) {
+    _isQuerying = value;
     notifyListeners();
   }
 
@@ -50,6 +57,36 @@ class MyBookingViewModel with ChangeNotifier {
       Utils.flushBarErrorMessage(error.toString(), context, isBottom: false);
       print(error);
       setLoading(false);
+    });
+  }
+
+  Future<void> updateStatus(
+      BuildContext context, String appointmentId, dynamic status) async {
+    setQuerying(true);
+    _myBookingRepository
+        .updateCompletedStatus(appointmentId, status)
+        .then((value) {
+      if (value.acknowledgement == false) {
+        Utils.flushBarErrorMessage(value.description ?? "", context);
+        setQuerying(false);
+        return;
+      }
+      _appointments
+          .firstWhere((element) => element.id == appointmentId)
+          .status = value.data['status'];
+      if (value.data['status'] == "completed") {
+        Utils.flushBarSuccessMessage(value.message ?? "", context,
+            isBottom: false);
+      } else {
+        Utils.flushBarErrorMessage(value.message ?? "", context,
+            isBottom: false);
+      }
+
+      setQuerying(false);
+    }).onError((error, stackTrace) {
+      Utils.flushBarErrorMessage(error.toString(), context, isBottom: false);
+      print(error);
+      setQuerying(false);
     });
   }
 }
