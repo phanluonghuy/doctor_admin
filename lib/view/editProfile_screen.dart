@@ -142,7 +142,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
-                  child: Stack(
+                  child:
+                  Stack(
                 children: [
                   ValueListenableBuilder<XFile?>(
                     valueListenable: _imageXFile,
