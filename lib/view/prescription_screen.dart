@@ -27,8 +27,10 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final viewModel = context.read<PrescriptionsViewModel>();
-      viewModel.getAllMedicine(context);
-      viewModel.getMedicalRecordsByAppointment(context);
+      viewModel.getAllMedicine(context).whenComplete((){
+        viewModel.getMedicalRecordsByAppointment(context);
+      });
+
     });
   }
 
@@ -43,11 +45,9 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
     super.dispose();
   }
 
-
-
-
   void showMultiSelectDialog(BuildContext context) {
-    final viewModel = Provider.of<PrescriptionsViewModel>(context, listen: false);
+    final viewModel =
+        Provider.of<PrescriptionsViewModel>(context, listen: false);
     List<String> tempSelected = List.from(viewModel.selectedTimes);
 
     showDialog(
@@ -70,6 +70,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                           tempSelected.remove(option);
                         }
                         viewModel.selectedTimes = tempSelected;
+                        // print(viewModel.selectedTimes);
                       },
                     );
                   },
@@ -95,7 +96,6 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -120,7 +120,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
-            child: Column(
+            child: (viewModel.loading) ? Center(child: CircularProgressIndicator()) : Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Align(
@@ -129,13 +129,14 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                 SizedBox(height: height * 0.01),
                 DropdownMenu(
                   hintText: "Select Medicine",
+                  initialSelection: viewModel.medicineIds,
                   focusNode: _medicineFocus,
                   width: double.infinity,
                   dropdownMenuEntries: viewModel.medicines
                       .map((e) => DropdownMenuEntry<Object>(
-                            value: e.id,
-                            label: e.name,
-                          ))
+                    value: e.id,
+                    label: e.name,
+                  ))
                       .toList(),
                   onSelected: (value) {
                     viewModel.medicineIds = value.toString();
@@ -150,6 +151,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                 SizedBox(height: height * 0.01),
                 TextFormField(
                   keyboardType: TextInputType.number,
+                  initialValue: viewModel.amountPerDose.toString(),
                   focusNode: _amountFocus,
                   onChanged: (value) {
                     viewModel.amountPerDose = int.parse(value);
@@ -172,6 +174,8 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                 SizedBox(height: height * 0.01),
                 TextFormField(
                   keyboardType: TextInputType.number,
+                  // controller: viewModel.frequencyController,
+                  initialValue: viewModel.frequency.toString(),
                   focusNode: _frequencyFocus,
                   onChanged: (value) {
                     viewModel.frequency = int.parse(value);
@@ -223,6 +227,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                       TextFormField(
                         keyboardType: TextInputType.text,
                         focusNode: _timeDescriptionFocus,
+                        initialValue: viewModel.timeDescription,
                         onChanged: (value) {
                           viewModel.timeDescription = value;
                         },
@@ -248,6 +253,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                 TextFormField(
                   keyboardType: TextInputType.number,
                   focusNode: _durationFocus,
+                  initialValue: viewModel.duration.toString(),
                   onChanged: (value) {
                     viewModel.duration = int.parse(value);
                   },
@@ -305,9 +311,12 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                   "medicineId": viewModel.medicineIds,
                   "amountPerDose": viewModel.amountPerDose,
                   "frequencyPerDay": viewModel.frequency,
-                  "times": viewModel.selectedTimes.map((e) => {"time": e.toLowerCase()}).toList(),
+                  "times": viewModel.selectedTimes
+                      .map((e) => {"time": e.toLowerCase()})
+                      .toList(),
                   "description": viewModel.timeDescription,
                   "duration": viewModel.duration,
+                  "id": viewModel.dosage?.id ?? ""
                 };
                 viewModel.createDosages(context, data);
                 // viewModel.createPrescriptions(context);

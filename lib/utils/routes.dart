@@ -1,3 +1,4 @@
+import 'package:doctoradmin/models/chatModel.dart';
 import 'package:doctoradmin/view/booking_screen.dart';
 import 'package:doctoradmin/view/chat_screen.dart';
 import 'package:doctoradmin/view/doctorBooking/selectBookingTime_screen.dart';
@@ -18,7 +19,6 @@ import 'package:doctoradmin/view/uploadResult_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../models/chatModel.dart';
 import '../res/navigations/navigationMenu.dart';
 import '../view/changePassword_screen.dart';
 import '../view/conversation_screen.dart';

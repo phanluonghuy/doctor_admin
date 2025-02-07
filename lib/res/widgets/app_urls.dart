@@ -1,6 +1,6 @@
 class AppUrls {
-  static const socketUrl = "ws://192.168.1.13:8080";
-  static const baseUrl = "http://192.168.1.13:8080/api";
+  static const socketUrl = "ws://192.168.165.32:8080";
+  static const baseUrl = "http://192.168.165.32:8080/api";
   static const loginEndPoint = "$baseUrl/user/sign-in";
   static const registerEndPoint = "$baseUrl/user/sign-up";
   static const sendOTP = "$baseUrl/user/getOTP";
@@ -26,10 +26,11 @@ class AppUrls {
   static const getNearestAppointment =
       "$baseUrl/appointment/appointment/nearest";
 
-
-  static var getConversationsByUserId = (String userId) => "$baseUrl/conversation/$userId";
+  static var getConversationsByUserId =
+      (String userId) => "$baseUrl/conversation/$userId";
   static const uploadFileImage = "$baseUrl/conversation/image";
-  static var getUpdateConversation = (String conversationId) => "$baseUrl/conversation/update/$conversationId/update";
+  static var getUpdateConversation = (String conversationId) =>
+      "$baseUrl/conversation/update/$conversationId/update";
   static const createConversation = "$baseUrl/conversation";
 
   static var updateCompletedStatus =
@@ -43,15 +44,15 @@ class AppUrls {
       (String testResultId) => "$baseUrl/medical-record/$testResultId";
 
   static const getAllMedicine = "$baseUrl/medicine";
-  static var getMedicalRecordsByAppointment =
-      (String appointmentId) => "$baseUrl/medical-record/appointment/$appointmentId";
+  static var getMedicalRecordsByAppointment = (String appointmentId) =>
+      "$baseUrl/medical-record/appointment/$appointmentId";
   static const createDosages = "$baseUrl/dosage";
   static const createPrescription = "$baseUrl/prescription";
 
-  static var getWorkSchedule = (String id) => "$baseUrl/work-schedule/doctor/$id";
+  static var getWorkSchedule =
+      (String id) => "$baseUrl/work-schedule/doctor/$id";
 
   static const updateWorkSchedule = "$baseUrl/work-schedule";
-
 }
 
 //testerpayment@test.com

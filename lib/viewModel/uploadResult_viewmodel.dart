@@ -73,13 +73,14 @@ class UploadResultViewModel with ChangeNotifier {
   Future<void> createTestResults(BuildContext context, dynamic data) async {
     setLoading(true);
     _testRepository.createTestResults(data).then((value) {
+      print(value);
       if (value.acknowledgement == false) {
         Utils.flushBarErrorMessage(value.message ?? "", context);
         setLoading(false);
         return;
       }
       _testResultId = value.data["_id"];
-      // Utils.flushBarSuccessMessage(value.message ?? "", context);
+      Utils.flushBarSuccessMessage(value.message ?? "", context);
       setLoading(false);
     }).onError((error, stackTrace) {
       Utils.flushBarErrorMessage(error.toString(), context, isBottom: false);

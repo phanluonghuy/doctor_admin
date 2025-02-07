@@ -1,10 +1,12 @@
 import 'package:doctoradmin/data/response/status.dart';
+import 'package:doctoradmin/models/dosageModel.dart';
 import 'package:doctoradmin/models/medicalRecordModel.dart';
 import 'package:doctoradmin/models/medicineModel.dart';
 import 'package:doctoradmin/repository/prescription_repository.dart';
 import 'package:doctoradmin/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class PrescriptionsViewModel with ChangeNotifier {
   final PrescriptionRepository _prescriptionRepository =
@@ -13,7 +15,7 @@ class PrescriptionsViewModel with ChangeNotifier {
   List<Medicine> get medicines => _medicines;
   String _medicineIds = "";
   int _amountPerDose = 0;
-  int _frequency = 0;
+  int _frequency = -1;
   String _time = "";
   String _timeDescription = "";
   int _duration = 0;
@@ -21,6 +23,7 @@ class PrescriptionsViewModel with ChangeNotifier {
   String _bookingId = "";
   MedicalRecord? _medicalRecord;
   bool _error = false;
+  Dosage? _dosage;
   List<String> _selectedTimes = [];
   final List<String> _options = ["Morning", "Afternoon", "Evening", "Night"];
   String _dosageId = "";
@@ -28,6 +31,12 @@ class PrescriptionsViewModel with ChangeNotifier {
   List<String> get options => _options;
 
   List<String> get selectedTimes => _selectedTimes;
+
+  Dosage? get dosage => _dosage;
+
+  set dosage(Dosage? value) {
+    _dosage = value;
+  }
 
   set selectedTimes(List<String> value) {
     _selectedTimes = value;
@@ -40,7 +49,7 @@ class PrescriptionsViewModel with ChangeNotifier {
     }
     setLoading(true);
     _prescriptionRepository.getAllMedicine().then((value) {
-      setLoading(false);
+      // setLoading(false);
       if (value.acknowledgement == false) {
         Utils.flushBarErrorMessage(value.message ?? "", context);
         return;
@@ -60,12 +69,25 @@ class PrescriptionsViewModel with ChangeNotifier {
     _prescriptionRepository
         .getMedicalRecordsByAppointment(_bookingId)
         .then((value) {
-      setLoading(false);
       if (value.acknowledgement == false) {
+        setLoading(false);
         Utils.flushBarErrorMessage(value.message ?? "", context);
         return;
       }
-      _medicalRecord = MedicalRecord.fromJson(value.data[0]);
+      _medicalRecord = MedicalRecord.fromJson(value.data['medicalRecords'][0]);
+      _dosage = Dosage.fromJson(value.data['dosage']);
+
+      _medicineIds = _dosage?.medicineId ?? "";
+      _amountPerDose = _dosage?.amountPerDose.toInt() ?? 0;
+      _frequency = _dosage?.frequencyPerDay ?? 0;
+      _timeDescription = _dosage?.description ?? "";
+      _duration = _dosage?.duration ?? 0;
+
+      _selectedTimes = _dosage?.times.map((e) => toBeginningOfSentenceCase(e.time)).toList() ?? [];
+
+
+      notifyListeners();
+      setLoading(false);
     }).onError((error, stackTrace) {
       Utils.flushBarErrorMessage(error.toString(), context, isBottom: false);
       print(error);
@@ -93,12 +115,11 @@ class PrescriptionsViewModel with ChangeNotifier {
     });
   }
 
-
   Future<void> createPrescriptions(BuildContext context) async {
-    Map<String,dynamic> data = {
+    Map<String, dynamic> data = {
       "medicalRecordId": _medicalRecord?.id,
       // TODO : Add the medicine ids
-      "dosageDetails" : [_dosageId]
+      "dosageDetails": [_dosageId]
     };
     setLoading(true);
     _prescriptionRepository.createPrescriptions(data).then((value) {
