@@ -25,29 +25,11 @@ class NavigationMenu extends StatelessWidget {
           controller: navigationProvider.tabController,
           // Using PersistentTabController to manage tab state
           screens: [
-            const HomeScreen(),
-            const ExploreScreen(),
             const BookingScreen(),
             const ChatScreen(),
             const ProfileScreen(),
           ],
           items: [
-            PersistentBottomNavBarItem(
-              icon: SvgPicture.asset(
-                'assets/icons/icons8-home.svg',
-                color: AppColors.primaryColor,
-              ),
-              title: 'Home',
-              activeColorPrimary: AppColors.primaryColor,
-              inactiveColorPrimary: Colors.grey,
-            ),
-            PersistentBottomNavBarItem(
-              icon: SvgPicture.asset('assets/icons/icons8-location.svg',
-                  color: AppColors.primaryColor),
-              title: 'Explore',
-              activeColorPrimary: AppColors.primaryColor,
-              inactiveColorPrimary: Colors.grey,
-            ),
             PersistentBottomNavBarItem(
               icon: SvgPicture.asset('assets/icons/icons8-calendar.svg',
                   color: AppColors.primaryColor),

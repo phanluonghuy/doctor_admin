@@ -48,10 +48,10 @@ final GoRouter router = GoRouter(
         path: '/createPassword',
         builder: (context, state) => const SignUpCreatePasswordScreen()),
     GoRoute(path: '/splash', builder: (context, state) => const SplashScreen()),
-    GoRoute(
-      path: '/home',
-      builder: (context, state) => const HomeScreen(),
-    ),
+    // GoRoute(
+    //   path: '/home',
+    //   builder: (context, state) => const HomeScreen(),
+    // ),
     GoRoute(
       path: '/navigationMenu',
       builder: (context, state) => const NavigationMenu(),
@@ -60,8 +60,8 @@ final GoRouter router = GoRouter(
         path: '/welcome', builder: (context, state) => const WelcomeScreen()),
     GoRoute(
         path: '/started', builder: (context, state) => const StartedScreen()),
-    GoRoute(
-        path: '/explore', builder: (context, state) => const ExploreScreen()),
+    // GoRoute(
+    //     path: '/explore', builder: (context, state) => const ExploreScreen()),
     GoRoute(
         path: '/booking', builder: (context, state) => const BookingScreen()),
     GoRoute(
