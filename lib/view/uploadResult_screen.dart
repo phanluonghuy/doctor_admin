@@ -318,10 +318,10 @@ class _UploadResultScreenState extends State<UploadResultScreen> {
                       _labNameFocus.requestFocus();
                       return;
                     }
-                    if (_imageXFile.value == null) {
-                      Utils.flushBarErrorMessage("Image is required", context);
-                      return;
-                    }
+                    // if (_imageXFile.value == null) {
+                    //   Utils.flushBarErrorMessage("Image is required", context);
+                    //   return;
+                    // }
                     Map<String, String> data = {
                       "appointmentId":
                           context.read<UploadResultViewModel>().bookingId,
@@ -337,8 +337,12 @@ class _UploadResultScreenState extends State<UploadResultScreen> {
                     };
                     uploadViewModel.createTestResults(context, data);
                     // TODO : Bug image required when updating test results
-                    uploadViewModel.uploadTestResults(
-                        context, data, _imageXFile.value);
+
+                    if (_imageXFile.value != null) {
+                      uploadViewModel.uploadTestResults(
+                          context, data, _imageXFile.value);
+                      return;
+                    }
                   },
                   context: context),
               SizedBox(height: height * 0.02),

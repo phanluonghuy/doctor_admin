@@ -1,3 +1,4 @@
+import 'package:doctoradmin/models/chatModel.dart';
 import 'package:doctoradmin/view/booking_screen.dart';
 import 'package:doctoradmin/view/chat_screen.dart';
 import 'package:doctoradmin/view/doctorBooking/selectBookingTime_screen.dart';
@@ -18,7 +19,6 @@ import 'package:doctoradmin/view/uploadResult_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../models/chatModel.dart';
 import '../res/navigations/navigationMenu.dart';
 import '../view/changePassword_screen.dart';
 import '../view/conversation_screen.dart';
@@ -48,10 +48,10 @@ final GoRouter router = GoRouter(
         path: '/createPassword',
         builder: (context, state) => const SignUpCreatePasswordScreen()),
     GoRoute(path: '/splash', builder: (context, state) => const SplashScreen()),
-    GoRoute(
-      path: '/home',
-      builder: (context, state) => const HomeScreen(),
-    ),
+    // GoRoute(
+    //   path: '/home',
+    //   builder: (context, state) => const HomeScreen(),
+    // ),
     GoRoute(
       path: '/navigationMenu',
       builder: (context, state) => const NavigationMenu(),
@@ -60,8 +60,8 @@ final GoRouter router = GoRouter(
         path: '/welcome', builder: (context, state) => const WelcomeScreen()),
     GoRoute(
         path: '/started', builder: (context, state) => const StartedScreen()),
-    GoRoute(
-        path: '/explore', builder: (context, state) => const ExploreScreen()),
+    // GoRoute(
+    //     path: '/explore', builder: (context, state) => const ExploreScreen()),
     GoRoute(
         path: '/booking', builder: (context, state) => const BookingScreen()),
     GoRoute(
