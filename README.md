@@ -1,16 +1,28 @@
-# doctoradmin
+# App for Doctor
 
-App For Doctor
+Doctor Admin is a Flutter application designed to manage doctor appointments, profiles, and patient interactions efficiently.
 
-## Getting Started
+## Overview
 
-This project is a starting point for a Flutter application.
+The Doctor Admin app is built to streamline the management of medical appointments, doctors' profiles, and patient interactions.
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+To get started with the project, follow these steps:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/phanluonghuy/doctor_admin.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd doctor_admin
+    ```
+3. Install dependencies:
+    ```sh
+    flutter pub get
+    ```
+4. Run the application:
+    ```sh
+    flutter run
+    ```
