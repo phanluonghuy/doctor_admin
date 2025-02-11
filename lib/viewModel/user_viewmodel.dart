@@ -65,7 +65,11 @@ class UserViewModel with ChangeNotifier {
   Future<bool> removeUser() async {
     final SharedPreferences sp = await SharedPreferences.getInstance();
     sp.remove("token");
-    SocketService.disconnect();
+    try {
+      SocketService.disconnect();
+    } catch (e) {
+      print('Error disconnecting socket: $e');
+    }
     _user = null; // Clear user data
     notifyListeners(); // Notify listeners after removing the user
     return true;
@@ -82,17 +86,17 @@ class UserViewModel with ChangeNotifier {
   Future<void> getUserProfile() async {
     try {
       var token = await getUserToken();
-      if (token != null) {
-        _userRepository.getProfile().then((value) {
+      if (token != null && (token.isNotEmpty)) {
+        await _userRepository.getProfile().then((value) {
           _user = User.fromJson(value.data);
           if (_user != null) {
             SocketService.connect(_user!.id);
           }
-          // print(_user?.name ?? "No name");
           notifyListeners();
         });
       }
     } catch (e) {
+      removeUser();
       print('Error getting profile: $e');
       rethrow;
     }
