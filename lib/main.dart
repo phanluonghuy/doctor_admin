@@ -28,10 +28,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ChatViewModel()),
+        ChangeNotifierProvider(create: (_) => ChatViewModel(), lazy: true),
         ChangeNotifierProvider(create: (_) => AuthViewModel(), lazy: true),
-        ChangeNotifierProvider(create: (_) => UserViewModel()),
-        ChangeNotifierProvider(create: (_) => DoctorViewModel()),
+        ChangeNotifierProvider(create: (_) => UserViewModel(), lazy: true),
+        ChangeNotifierProvider(create: (_) => DoctorViewModel(), lazy: true),
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
         ChangeNotifierProvider(
             create: (_) => DoctorBookingViewModel(), lazy: true),
@@ -39,10 +39,12 @@ class MyApp extends StatelessWidget {
             create: (_) => UploadResultViewModel(), lazy: true),
         ChangeNotifierProvider(
             create: (_) => SpecializationViewModel(), lazy: true),
-        ChangeNotifierProvider(create: (_) => PrescriptionsViewModel(), lazy: true),
+        ChangeNotifierProvider(
+            create: (_) => PrescriptionsViewModel(), lazy: true),
         ChangeNotifierProvider(create: (_) => MyBookingViewModel(), lazy: true),
         ChangeNotifierProvider(create: (_) => SignUpViewModel(), lazy: true),
-        ChangeNotifierProvider(create: (_)=>WorkScheduleProvider(), lazy: true),
+        ChangeNotifierProvider(
+            create: (_) => WorkScheduleProvider(), lazy: true),
       ],
       child: WillPopScope(
         onWillPop: () async {
